@@ -21,9 +21,11 @@ class ProjectController {
      * @param {View} ctx.view
      */
     async index({ request, response, view }) {
+        const { page } = request.get()
+
         const project = await Project.query()
             .with('user')
-            .fetch()
+            .paginate(page)
 
         return project
     }
